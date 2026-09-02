@@ -1,0 +1,1018 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAS SEO Handover</title>
+<meta name="robots" content="noindex">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root {
+    --paper: #F6F2EA;
+    --paper-raised: #FBF8F2;
+    --ink: #211D18;
+    --ink-soft: #4A443C;
+    --muted: #837A6B;
+    --line: #E1DACB;
+    --line-strong: #C9BFA9;
+    --accent: #C1531D;       /* hazard orange — P1 */
+    --accent-ink: #FFFFFF;
+    --warn: #A97323;         /* amber — P2 */
+    --warn-bg: #F3E7CF;
+    --ok: #2E5C50;           /* slate-teal — P3 / positive */
+    --ok-bg: #DEE9E3;
+    --crit-bg: #F3DDCB;
+    --link: #2C4F63;
+    --shadow: 0 1px 0 rgba(33,29,24,0.05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #18160F;
+      --paper-raised: #211E17;
+      --ink: #EFE9DC;
+      --ink-soft: #C9C0AE;
+      --muted: #9A8F79;
+      --line: #35301F;
+      --line-strong: #4A4329;
+      --accent: #E37A3D;
+      --accent-ink: #18160F;
+      --warn: #D5A44F;
+      --warn-bg: #362A11;
+      --ok: #7FB8A6;
+      --ok-bg: #17281F;
+      --crit-bg: #3B2412;
+      --link: #8FB6CC;
+      --shadow: 0 1px 0 rgba(0,0,0,0.3);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #18160F;
+    --paper-raised: #211E17;
+    --ink: #EFE9DC;
+    --ink-soft: #C9C0AE;
+    --muted: #9A8F79;
+    --line: #35301F;
+    --line-strong: #4A4329;
+    --accent: #E37A3D;
+    --accent-ink: #18160F;
+    --warn: #D5A44F;
+    --warn-bg: #362A11;
+    --ok: #7FB8A6;
+    --ok-bg: #17281F;
+    --crit-bg: #3B2412;
+    --link: #8FB6CC;
+    --shadow: 0 1px 0 rgba(0,0,0,0.3);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    font-size: 16.5px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 24px 96px;
+  }
+
+  .sheet {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--ink);
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Header ---------- */
+
+  .masthead {
+    padding: 56px 0 28px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+
+  h1.title {
+    font-size: clamp(30px, 5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+  }
+
+  .subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 28px;
+    margin-top: 26px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  .meta-row span b {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  /* ---------- Sections ---------- */
+
+  section { margin-top: 52px; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  h2.section-title {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+
+  p { margin: 0 0 14px; color: var(--ink-soft); }
+  p:last-child { margin-bottom: 0; }
+  p b, li b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Stat tiles ---------- */
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line-strong);
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .stat {
+    background: var(--paper-raised);
+    padding: 18px 16px;
+  }
+
+  .stat .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .stat .delta {
+    font-size: 13px;
+    color: var(--ok);
+    font-weight: 600;
+  }
+
+  .stat .label {
+    margin-top: 6px;
+    font-family: 'Archivo', sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  .stats-note {
+    margin-top: 12px;
+    font-size: 13.5px;
+    color: var(--muted);
+    border-left: 2px solid var(--line-strong);
+    padding-left: 12px;
+  }
+
+  /* ---------- Keyword table ---------- */
+
+  .kw-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 4px;
+    font-size: 14.5px;
+  }
+
+  .kw-table th {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-align: left;
+    padding: 0 10px 8px 0;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .kw-table td {
+    padding: 10px 10px 10px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
+    vertical-align: baseline;
+  }
+
+  .kw-table td:first-child { color: var(--ink); font-weight: 500; }
+  .kw-table .pos { font-family: 'IBM Plex Mono', monospace; color: var(--ink); }
+  .kw-table .pos.flag { color: var(--muted); }
+
+  .rank-pill {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 20px;
+    background: var(--ok-bg);
+    color: var(--ok);
+  }
+
+  /* ---------- Findings ---------- */
+
+  .finding {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 18px;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+  }
+  .finding:last-child { padding-bottom: 0; }
+
+  .priority {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .priority .n {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .chip {
+    display: inline-block;
+    width: fit-content;
+    font-family: 'Archivo', sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .chip.p1 { background: var(--crit-bg); color: var(--accent); }
+  .chip.p2 { background: var(--warn-bg); color: var(--warn); }
+  .chip.p3 { background: var(--ok-bg); color: var(--ok); }
+
+  .finding h3 {
+    font-size: 15.5px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .finding p { font-size: 15px; margin-bottom: 0; }
+
+  /* ---------- Opportunities list ---------- */
+
+  .opp {
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .opp:last-child { padding-bottom: 0; }
+  .opp h3 {
+    font-size: 15.5px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .opp p { font-size: 15px; margin-bottom: 0; }
+
+  /* ---------- 30-day checklist ---------- */
+
+  .checklist { list-style: none; margin: 0; padding: 0; }
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+  .checklist li:first-child { border-top: none; }
+  .checklist .box {
+    flex: none;
+    width: 15px;
+    height: 15px;
+    margin-top: 3px;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 3px;
+  }
+  .checklist b { color: var(--ink); font-weight: 600; }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 620px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .finding { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="masthead">
+    <p class="eyebrow">Handover Audit — SEO &amp; Site Health</p>
+    <h1 class="title">Rope Access Solutions</h1>
+    <p class="subtitle">www.rasltd.co — findings from the Semrush project and a live crawl of the homepage, ahead of account transfer.</p>
+    <div class="meta-row">
+      <span><b>Domain</b> rasltd.co</span>
+      <span><b>Market</b> United Kingdom</span>
+      <span><b>Source</b> Semrush · live crawl</span>
+      <span><b>Prepared</b> 2 Sep 2026</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-head"><span class="section-num">01</span><h2 class="section-title">Summary</h2></div>
+    <p>RAS already holds a strong foothold on its core term — <b>#1 for "rope access solutions"</b> — and carries a healthy 90 Authority Score. But the account is largely uninstrumented: Google Analytics/Search Console aren't feeding the Semrush project, only four keywords are being tracked against a site with nine-plus distinct service lines, and none of Semrush's audit tools (Site Audit, On-Page Checker, Backlink Audit) have been set up. In effect, the visible ranking data is a thin, accurate slice of a picture that's mostly dark. Before drawing conclusions about real performance, the first job is switching the lights on.</p>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">02</span><h2 class="section-title">Current standing</h2></div>
+    <div class="stats">
+      <div class="stat">
+        <div class="num">90</div>
+        <div class="label">Authority Score</div>
+      </div>
+      <div class="stat">
+        <div class="num">24 <span class="delta">+9.1%</span></div>
+        <div class="label">Referring Domains</div>
+      </div>
+      <div class="stat">
+        <div class="num">26.36<span style="font-size:16px;color:var(--muted)">%</span></div>
+        <div class="label">Visibility (UK, 7d)</div>
+      </div>
+      <div class="stat">
+        <div class="num">4</div>
+        <div class="label">Keywords Tracked</div>
+      </div>
+    </div>
+    <p class="stats-note">Organic traffic, paid traffic, and organic keyword counts are all reading zero in the dashboard, and the Organic Rankings widget returns "nothing found" for the domain — see Finding P1‑01. Treat those figures as unmeasured, not as zero.</p>
+
+    <table class="kw-table">
+      <thead>
+        <tr><th>Tracked keyword</th><th>Position</th><th>Visibility share</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>rope access solutions</td><td class="pos"><span class="rank-pill">1</span></td><td class="mono">25%</td></tr>
+        <tr><td>rope access companies scotland</td><td class="pos">16</td><td class="mono">0.82%</td></tr>
+        <tr><td>rope access scotland</td><td class="pos">32</td><td class="mono">0.54%</td></tr>
+        <tr><td>sas rope and rail</td><td class="pos flag">not ranking</td><td class="mono">—</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">03</span><h2 class="section-title">Findings log</h2></div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P1‑01</span><span class="chip p1">Immediate</span></div>
+      <div><h3>No Google Analytics or Search Console feeding the project</h3><p>Traffic Analytics, Organic Traffic, Organic Keywords and Paid Traffic are all reporting zero, and the site-wide Organic Rankings widget can't find the domain at all. This isn't a performance problem — it's a wiring problem. Nothing about actual site performance can be judged until this is connected.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P1‑02</span><span class="chip p1">Immediate</span></div>
+      <div><h3>Position Tracking covers 4 keywords against 9+ service lines</h3><p>Rockfall mitigation, slope stabilisation, vegetation management, concrete &amp; masonry repair, drainage remediation and drilling are all offered on-site but none are in the tracked keyword set. Real visibility across the business is currently unknown.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P1‑03</span><span class="chip p1">Immediate</span></div>
+      <div><h3>Site Audit, On-Page Checker and Backlink Audit are unconfigured</h3><p>All three show "Set up" rather than results. There is no crawl-based technical audit, no content-gap analysis and no backlink toxicity check on record yet — these establish the actual baseline this document can only approximate from a single-page crawl.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P2‑01</span><span class="chip p2">Scheduled</span></div>
+      <div><h3>Meta description runs to 338 characters</h3><p>Google typically displays roughly 155–160 characters before truncating. The current homepage description is more than double that, so the back half is never seen in search results — wasted copy that should be doing work.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P2‑02</span><span class="chip p2">Scheduled</span></div>
+      <div><h3>5 of 31 homepage images have no alt text</h3><p>A gap for both accessibility and image search — Google Images is a plausible discovery channel for site/inspection photography that RAS likely has plenty of.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P2‑03</span><span class="chip p2">Scheduled</span></div>
+      <div><h3>og:image is served over http:// on an https:// page</h3><p>A mixed-content link-preview image can silently fail to render when the page is shared on Slack, LinkedIn or iMessage. One-line fix in the site's social settings.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P3‑01</span><span class="chip p3">Monitor</span></div>
+      <div><h3>Heading capitalisation is inconsistent</h3><p>Section headings mix Title Case, Sentence case and ALL CAPS ("Rockfall mitigation" vs. "CONCRETE &amp; MASONRY REPAIRS"). Cosmetic, but worth a pass for brand consistency at the next content update.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P3‑02</span><span class="chip p3">Monitor</span></div>
+      <div><h3>90 Authority Score sits on a thin 24-domain base</h3><p>Not necessarily a problem, but worth confirming with a proper Backlink Audit once it's set up (P1‑03) — a small referring-domain count carrying a high score is worth a quality check rather than taking at face value.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P3‑03</span><span class="chip p3">Monitor</span></div>
+      <div><h3>Zero AI-search visibility (ChatGPT, AI Overview, AI Mode, Gemini)</h3><p>Not urgent relative to the gaps above, but worth a baseline note now that this figure sits at zero, ahead of tracking it as that referral channel grows.</p></div>
+    </div>
+
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">04</span><h2 class="section-title">Where the upside is</h2></div>
+
+    <div class="opp">
+      <h3>A genuine #1 to build around</h3>
+      <p>"Rope access solutions" at position 1 is the anchor asset. It's worth deliberately building topical authority outward from it — internal links from service pages into the ranking page, and content that targets the adjacent terms searchers use next.</p>
+    </div>
+    <div class="opp">
+      <h3>Scotland shows a regional opening</h3>
+      <p>Two of the four tracked terms are Scotland-specific and sit at 16 and 32 — close enough to be winnable with dedicated location content, rather than starting cold.</p>
+    </div>
+    <div class="opp">
+      <h3>Nine service lines, almost no dedicated tracking</h3>
+      <p>Once keyword tracking is widened (P1‑02), there's a reasonable chance several service pages are already ranking somewhere in the top 100 without anyone knowing it — cheaper wins than starting from zero.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">05</span><h2 class="section-title">First 30 days</h2></div>
+    <ul class="checklist">
+      <li><span class="box"></span><span><b>Connect Google Analytics + Search Console</b> to the Semrush project — unblocks every zeroed-out metric on the dashboard.</span></li>
+      <li><span class="box"></span><span><b>Run Site Audit, On-Page Checker and Backlink Audit</b> — turns this single-page crawl into a full technical baseline.</span></li>
+      <li><span class="box"></span><span><b>Expand Position Tracking</b> to cover all core service terms, plus the Scotland-specific variants.</span></li>
+      <li><span class="box"></span><span><b>Trim the meta description</b> to ~155 characters and rewrite og:image to https.</span></li>
+      <li><span class="box"></span><span><b>Add alt text</b> to the 5 flagged homepage images.</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>RAS · SEO Handover Audit</span>
+    <span>Semrush project + live crawl, 2 Sep 2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAS SEO Handover</title>
+<meta name="robots" content="noindex">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root {
+    --paper: #F6F2EA;
+    --paper-raised: #FBF8F2;
+    --ink: #211D18;
+    --ink-soft: #4A443C;
+    --muted: #837A6B;
+    --line: #E1DACB;
+    --line-strong: #C9BFA9;
+    --accent: #C1531D;       /* hazard orange — P1 */
+    --accent-ink: #FFFFFF;
+    --warn: #A97323;         /* amber — P2 */
+    --warn-bg: #F3E7CF;
+    --ok: #2E5C50;           /* slate-teal — P3 / positive */
+    --ok-bg: #DEE9E3;
+    --crit-bg: #F3DDCB;
+    --link: #2C4F63;
+    --shadow: 0 1px 0 rgba(33,29,24,0.05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #18160F;
+      --paper-raised: #211E17;
+      --ink: #EFE9DC;
+      --ink-soft: #C9C0AE;
+      --muted: #9A8F79;
+      --line: #35301F;
+      --line-strong: #4A4329;
+      --accent: #E37A3D;
+      --accent-ink: #18160F;
+      --warn: #D5A44F;
+      --warn-bg: #362A11;
+      --ok: #7FB8A6;
+      --ok-bg: #17281F;
+      --crit-bg: #3B2412;
+      --link: #8FB6CC;
+      --shadow: 0 1px 0 rgba(0,0,0,0.3);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #18160F;
+    --paper-raised: #211E17;
+    --ink: #EFE9DC;
+    --ink-soft: #C9C0AE;
+    --muted: #9A8F79;
+    --line: #35301F;
+    --line-strong: #4A4329;
+    --accent: #E37A3D;
+    --accent-ink: #18160F;
+    --warn: #D5A44F;
+    --warn-bg: #362A11;
+    --ok: #7FB8A6;
+    --ok-bg: #17281F;
+    --crit-bg: #3B2412;
+    --link: #8FB6CC;
+    --shadow: 0 1px 0 rgba(0,0,0,0.3);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    font-size: 16.5px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0 24px 96px;
+  }
+
+  .sheet {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--ink);
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Header ---------- */
+
+  .masthead {
+    padding: 56px 0 28px;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+  }
+
+  h1.title {
+    font-size: clamp(30px, 5vw, 42px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.08;
+  }
+
+  .subtitle {
+    font-family: 'Source Serif 4', serif;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 18px;
+    margin-top: 10px;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 28px;
+    margin-top: 26px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  .meta-row span b {
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+
+  /* ---------- Sections ---------- */
+
+  section { margin-top: 52px; }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  h2.section-title {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+
+  p { margin: 0 0 14px; color: var(--ink-soft); }
+  p:last-child { margin-bottom: 0; }
+  p b, li b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- Stat tiles ---------- */
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line-strong);
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .stat {
+    background: var(--paper-raised);
+    padding: 18px 16px;
+  }
+
+  .stat .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+
+  .stat .delta {
+    font-size: 13px;
+    color: var(--ok);
+    font-weight: 600;
+  }
+
+  .stat .label {
+    margin-top: 6px;
+    font-family: 'Archivo', sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  .stats-note {
+    margin-top: 12px;
+    font-size: 13.5px;
+    color: var(--muted);
+    border-left: 2px solid var(--line-strong);
+    padding-left: 12px;
+  }
+
+  /* ---------- Keyword table ---------- */
+
+  .kw-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 4px;
+    font-size: 14.5px;
+  }
+
+  .kw-table th {
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    text-align: left;
+    padding: 0 10px 8px 0;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .kw-table td {
+    padding: 10px 10px 10px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
+    vertical-align: baseline;
+  }
+
+  .kw-table td:first-child { color: var(--ink); font-weight: 500; }
+  .kw-table .pos { font-family: 'IBM Plex Mono', monospace; color: var(--ink); }
+  .kw-table .pos.flag { color: var(--muted); }
+
+  .rank-pill {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 20px;
+    background: var(--ok-bg);
+    color: var(--ok);
+  }
+
+  /* ---------- Findings ---------- */
+
+  .finding {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 18px;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+  }
+  .finding:last-child { padding-bottom: 0; }
+
+  .priority {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .priority .n {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .chip {
+    display: inline-block;
+    width: fit-content;
+    font-family: 'Archivo', sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 3px 8px;
+    border-radius: 3px;
+  }
+  .chip.p1 { background: var(--crit-bg); color: var(--accent); }
+  .chip.p2 { background: var(--warn-bg); color: var(--warn); }
+  .chip.p3 { background: var(--ok-bg); color: var(--ok); }
+
+  .finding h3 {
+    font-size: 15.5px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .finding p { font-size: 15px; margin-bottom: 0; }
+
+  /* ---------- Opportunities list ---------- */
+
+  .opp {
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .opp:last-child { padding-bottom: 0; }
+  .opp h3 {
+    font-size: 15.5px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .opp p { font-size: 15px; margin-bottom: 0; }
+
+  /* ---------- 30-day checklist ---------- */
+
+  .checklist { list-style: none; margin: 0; padding: 0; }
+  .checklist li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 11px 0;
+    border-top: 1px solid var(--line);
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+  .checklist li:first-child { border-top: none; }
+  .checklist .box {
+    flex: none;
+    width: 15px;
+    height: 15px;
+    margin-top: 3px;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 3px;
+  }
+  .checklist b { color: var(--ink); font-weight: 600; }
+
+  footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 2px solid var(--ink);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 620px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .finding { grid-template-columns: 1fr; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <header class="masthead">
+    <p class="eyebrow">Handover Audit — SEO &amp; Site Health</p>
+    <h1 class="title">Rope Access Solutions</h1>
+    <p class="subtitle">www.rasltd.co — findings from the Semrush project and a live crawl of the homepage, ahead of account transfer.</p>
+    <div class="meta-row">
+      <span><b>Domain</b> rasltd.co</span>
+      <span><b>Market</b> United Kingdom</span>
+      <span><b>Source</b> Semrush · live crawl</span>
+      <span><b>Prepared</b> 2 Sep 2026</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="section-head"><span class="section-num">01</span><h2 class="section-title">Summary</h2></div>
+    <p>RAS already holds a strong foothold on its core term — <b>#1 for "rope access solutions"</b> — and carries a healthy 90 Authority Score. But the account is largely uninstrumented: Google Analytics/Search Console aren't feeding the Semrush project, only four keywords are being tracked against a site with nine-plus distinct service lines, and none of Semrush's audit tools (Site Audit, On-Page Checker, Backlink Audit) have been set up. In effect, the visible ranking data is a thin, accurate slice of a picture that's mostly dark. Before drawing conclusions about real performance, the first job is switching the lights on.</p>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">02</span><h2 class="section-title">Current standing</h2></div>
+    <div class="stats">
+      <div class="stat">
+        <div class="num">90</div>
+        <div class="label">Authority Score</div>
+      </div>
+      <div class="stat">
+        <div class="num">24 <span class="delta">+9.1%</span></div>
+        <div class="label">Referring Domains</div>
+      </div>
+      <div class="stat">
+        <div class="num">26.36<span style="font-size:16px;color:var(--muted)">%</span></div>
+        <div class="label">Visibility (UK, 7d)</div>
+      </div>
+      <div class="stat">
+        <div class="num">4</div>
+        <div class="label">Keywords Tracked</div>
+      </div>
+    </div>
+    <p class="stats-note">Organic traffic, paid traffic, and organic keyword counts are all reading zero in the dashboard, and the Organic Rankings widget returns "nothing found" for the domain — see Finding P1‑01. Treat those figures as unmeasured, not as zero.</p>
+
+    <table class="kw-table">
+      <thead>
+        <tr><th>Tracked keyword</th><th>Position</th><th>Visibility share</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>rope access solutions</td><td class="pos"><span class="rank-pill">1</span></td><td class="mono">25%</td></tr>
+        <tr><td>rope access companies scotland</td><td class="pos">16</td><td class="mono">0.82%</td></tr>
+        <tr><td>rope access scotland</td><td class="pos">32</td><td class="mono">0.54%</td></tr>
+        <tr><td>sas rope and rail</td><td class="pos flag">not ranking</td><td class="mono">—</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">03</span><h2 class="section-title">Findings log</h2></div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P1‑01</span><span class="chip p1">Immediate</span></div>
+      <div><h3>No Google Analytics or Search Console feeding the project</h3><p>Traffic Analytics, Organic Traffic, Organic Keywords and Paid Traffic are all reporting zero, and the site-wide Organic Rankings widget can't find the domain at all. This isn't a performance problem — it's a wiring problem. Nothing about actual site performance can be judged until this is connected.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P1‑02</span><span class="chip p1">Immediate</span></div>
+      <div><h3>Position Tracking covers 4 keywords against 9+ service lines</h3><p>Rockfall mitigation, slope stabilisation, vegetation management, concrete &amp; masonry repair, drainage remediation and drilling are all offered on-site but none are in the tracked keyword set. Real visibility across the business is currently unknown.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P1‑03</span><span class="chip p1">Immediate</span></div>
+      <div><h3>Site Audit, On-Page Checker and Backlink Audit are unconfigured</h3><p>All three show "Set up" rather than results. There is no crawl-based technical audit, no content-gap analysis and no backlink toxicity check on record yet — these establish the actual baseline this document can only approximate from a single-page crawl.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P2‑01</span><span class="chip p2">Scheduled</span></div>
+      <div><h3>Meta description runs to 338 characters</h3><p>Google typically displays roughly 155–160 characters before truncating. The current homepage description is more than double that, so the back half is never seen in search results — wasted copy that should be doing work.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P2‑02</span><span class="chip p2">Scheduled</span></div>
+      <div><h3>5 of 31 homepage images have no alt text</h3><p>A gap for both accessibility and image search — Google Images is a plausible discovery channel for site/inspection photography that RAS likely has plenty of.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P2‑03</span><span class="chip p2">Scheduled</span></div>
+      <div><h3>og:image is served over http:// on an https:// page</h3><p>A mixed-content link-preview image can silently fail to render when the page is shared on Slack, LinkedIn or iMessage. One-line fix in the site's social settings.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P3‑01</span><span class="chip p3">Monitor</span></div>
+      <div><h3>Heading capitalisation is inconsistent</h3><p>Section headings mix Title Case, Sentence case and ALL CAPS ("Rockfall mitigation" vs. "CONCRETE &amp; MASONRY REPAIRS"). Cosmetic, but worth a pass for brand consistency at the next content update.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P3‑02</span><span class="chip p3">Monitor</span></div>
+      <div><h3>90 Authority Score sits on a thin 24-domain base</h3><p>Not necessarily a problem, but worth confirming with a proper Backlink Audit once it's set up (P1‑03) — a small referring-domain count carrying a high score is worth a quality check rather than taking at face value.</p></div>
+    </div>
+
+    <div class="finding">
+      <div class="priority"><span class="n">P3‑03</span><span class="chip p3">Monitor</span></div>
+      <div><h3>Zero AI-search visibility (ChatGPT, AI Overview, AI Mode, Gemini)</h3><p>Not urgent relative to the gaps above, but worth a baseline note now that this figure sits at zero, ahead of tracking it as that referral channel grows.</p></div>
+    </div>
+
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">04</span><h2 class="section-title">Where the upside is</h2></div>
+
+    <div class="opp">
+      <h3>A genuine #1 to build around</h3>
+      <p>"Rope access solutions" at position 1 is the anchor asset. It's worth deliberately building topical authority outward from it — internal links from service pages into the ranking page, and content that targets the adjacent terms searchers use next.</p>
+    </div>
+    <div class="opp">
+      <h3>Scotland shows a regional opening</h3>
+      <p>Two of the four tracked terms are Scotland-specific and sit at 16 and 32 — close enough to be winnable with dedicated location content, rather than starting cold.</p>
+    </div>
+    <div class="opp">
+      <h3>Nine service lines, almost no dedicated tracking</h3>
+      <p>Once keyword tracking is widened (P1‑02), there's a reasonable chance several service pages are already ranking somewhere in the top 100 without anyone knowing it — cheaper wins than starting from zero.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><span class="section-num">05</span><h2 class="section-title">First 30 days</h2></div>
+    <ul class="checklist">
+      <li><span class="box"></span><span><b>Connect Google Analytics + Search Console</b> to the Semrush project — unblocks every zeroed-out metric on the dashboard.</span></li>
+      <li><span class="box"></span><span><b>Run Site Audit, On-Page Checker and Backlink Audit</b> — turns this single-page crawl into a full technical baseline.</span></li>
+      <li><span class="box"></span><span><b>Expand Position Tracking</b> to cover all core service terms, plus the Scotland-specific variants.</span></li>
+      <li><span class="box"></span><span><b>Trim the meta description</b> to ~155 characters and rewrite og:image to https.</span></li>
+      <li><span class="box"></span><span><b>Add alt text</b> to the 5 flagged homepage images.</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>RAS · SEO Handover Audit</span>
+    <span>Semrush project + live crawl, 2 Sep 2026</span>
+  </footer>
+
+</div>
+</body>
+</html>
